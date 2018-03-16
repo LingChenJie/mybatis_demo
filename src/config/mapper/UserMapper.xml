@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，后面会讲 -->
-<mapper namespace="com.jiechen.pojo.UesrMapper">
+<mapper namespace="com.jiechen.pojo.UserMapper">
 
     <select id="queryUserById" parameterType="int" resultType="com.jiechen.pojo.User">
         SELECT * FROM user WHERE id = #{id}
@@ -11,24 +11,24 @@
 
     <!-- 如果返回多个结果，mybatis会自动把返回的结果放在list容器中 -->
     <!-- resultType的配置和返回一个结果的配置一样 -->
-    <select id="queryUserByUsername" parameterType="string" resultType="com.jiechen.pojo.User">
+    <select id="queryUserByUsername" parameterType="string" resultType="user">
         SELECT * FROM `user` WHERE username LIKE #{username}
     </select>
 
     <!-- 如果传入的参数是简单数据类型，${}里面必须写value -->
-    <select id="queryUserByUsername2" parameterType="string" resultType="com.jiechen.pojo.User">
+    <select id="queryUserByUsername2" parameterType="string" resultType="user">
         SELECT * FROM `user` WHERE username LIKE '%${value}%'
     </select>
 
     <!-- 保存用户 -->
-    <insert id="saveUser" parameterType="com.jiechen.pojo.User">
+    <insert id="saveUser" parameterType="user">
         INSERT INTO `user`
         (username,password) VALUES
         (#{username},#{password})
     </insert>
 
     <!-- 保存用户 -->
-    <insert id="saveUser2" parameterType="com.jiechen.pojo.User">
+    <insert id="saveUser2" parameterType="user">
         <!-- selectKey 标签实现主键返回 -->
         <!-- keyColumn:主键对应的表中的哪一列 -->
         <!-- keyProperty：主键对应的pojo中的哪一个属性 -->
@@ -45,7 +45,7 @@
 
 
     <!-- 更新用户 -->
-    <update id="updateUserById" parameterType="com.jiechen.pojo.User">
+    <update id="updateUserById" parameterType="user">
         UPDATE `user` SET
         username = #{username} WHERE id = #{id}
     </update>
