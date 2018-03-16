@@ -2,6 +2,7 @@ package com.jiechen.test;
 
 import com.jiechen.pojo.UserMapper;
 import com.jiechen.pojo.User;
+import com.jiechen.pojo.UserOrder;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -12,7 +13,7 @@ import org.junit.Test;
 import java.io.InputStream;
 import java.util.List;
 
-public class MybatisTest {
+public class UserTest {
 
     private SqlSessionFactory sqlSessionFactory;
 
@@ -139,5 +140,24 @@ public class MybatisTest {
         sqlSession.commit();
         sqlSession.close();
     }
+
+    @Test
+    public void testQueryUserOrder() {
+        // mybatis和spring整合，整合之后，交给spring管理
+        SqlSession sqlSession = this.sqlSessionFactory.openSession();
+        // 创建Mapper接口的动态代理对象，整合之后，交给spring管理
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        // 使用userMapper执行根据条件查询用户
+        List<UserOrder> list = userMapper.queryUserOrder();
+
+        for (UserOrder u : list) {
+            System.out.println(u.toString());
+        }
+
+        // mybatis和spring整合，整合之后，交给spring管理
+        sqlSession.close();
+    }
+
 
 }

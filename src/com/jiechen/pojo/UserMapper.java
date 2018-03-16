@@ -33,4 +33,9 @@ public interface UserMapper {
      * 根据id删除用户
      */
     void deleteUserById(int id);
+
+    /**
+     * 一对多关联，查询用户，用户内部包含该用户的订单
+     */
+    List<UserOrder> queryUserOrder();
 }
